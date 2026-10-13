@@ -4,10 +4,14 @@ Companion repo for an article series on transitioning from Data Engineering to A
 
 This repo is not a clone and run artifact. It holds the reasoning behind the real decisions made while building and operating the agent: what broke, why, what was tried, and what shipped. The full implementation, complete Terraform, the full system prompt, the full codebase, stays in a private lab repo and is intentionally not reproduced here.
 
+## Architecture at a glance
+
+[media/architecture.drawio](media/architecture.drawio): the tools involved and how a question moves through them, Streamlit, the Strands Agent, Amazon Bedrock, AWS Lambda, the NBA Stats API, and CloudWatch. Opens directly in GitHub's own viewer, no extra software needed. The same flow, with more detail on the reliability layer, is in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
 ## Layout
 
 - `docs/`: everything written, one topic per file.
-- `media/`: every screen recording and screenshot referenced from `docs/`.
+- `media/`: every diagram, screen recording, and screenshot referenced from `docs/`.
 
 ## What is here so far
 
