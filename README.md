@@ -8,7 +8,7 @@ This repo is not a clone and run artifact. It holds the reasoning behind the rea
 
 ![Infrastructure diagram: Streamlit, Strands Agent, AWS Lambda, Amazon Bedrock, CloudWatch, and the NBA Stats API](media/infra_diagram.png)
 
-Editable source is in [media/architecture.drawio](media/architecture.drawio), opens directly in GitHub's own viewer. The same flow, with more detail on the reliability layer, is in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+The same flow, with more detail on the reliability layer, is in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Layout
 
