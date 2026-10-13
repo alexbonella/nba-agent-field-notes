@@ -2,9 +2,9 @@
 
 ## Local run: works fine
 
-![Local agent comparing LeBron James and Jaylen Brown](nba_agent_local_lebron_jaylenbrown.gif)
+![Local agent comparing LeBron James and Jaylen Brown](../media/nba_agent_local_lebron_jaylenbrown.gif)
 
-![Local agent comparing Giannis Antetokounmpo and Klay Thompson](nba_agent_local_giannis_klay_heat.gif)
+![Local agent comparing Giannis Antetokounmpo and Klay Thompson](../media/nba_agent_local_giannis_klay_heat.gif)
 
 Same code, same question type, run locally against the real NBA Stats API. Real data came back both times, zero failed tool calls.
 
@@ -41,9 +41,9 @@ A `null` HTTP status means no response ever arrived at all, not an explicit bloc
 
 The clearest comparison is the full agent, same exact question, asked twice, once against the local agent, once against the real deployed Lambda.
 
-![Local agent answering the Giannis and Klay Thompson question with real data](nba_agent_local_giannis_klay_heat.gif)
+![Local agent answering the Giannis and Klay Thompson question with real data](../media/nba_agent_local_giannis_klay_heat.gif)
 
-![Deployed Lambda answering the same question honestly instead of inventing data](nba_agent_lambda_giannis_klay_heat_failure.gif)
+![Deployed Lambda answering the same question honestly instead of inventing data](../media/nba_agent_lambda_giannis_klay_heat_failure.gif)
 
 Locally, the same question returns real stats, verified above. Through the deployed Lambda, the raw CloudWatch log for that exact run shows what actually happened underneath the honest answer in the gif:
 
