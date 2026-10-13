@@ -6,7 +6,9 @@ This repo is not a clone and run artifact. It holds the reasoning behind the rea
 
 ## Architecture at a glance
 
-[media/architecture.drawio](media/architecture.drawio): the tools involved and how a question moves through them, Streamlit, the Strands Agent, Amazon Bedrock, AWS Lambda, the NBA Stats API, and CloudWatch. Opens directly in GitHub's own viewer, no extra software needed. The same flow, with more detail on the reliability layer, is in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+![Infrastructure diagram: Streamlit, Strands Agent, AWS Lambda, Amazon Bedrock, CloudWatch, and the NBA Stats API](media/infra_diagram.png)
+
+Editable source is in [media/architecture.drawio](media/architecture.drawio), opens directly in GitHub's own viewer. The same flow, with more detail on the reliability layer, is in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Layout
 
