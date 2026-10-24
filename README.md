@@ -17,7 +17,7 @@ The same flow, with more detail on the reliability layer, is in [docs/ARCHITECTU
 
 ## What is here so far
 
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): one diagram, how a question actually flows through the agent, both ways it runs, including the data-source dispatch that closed two of the four tools' exposure to a known cloud-IP failure, and where that failure still sits open for the other two.
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): one diagram, how a question actually flows through the agent, both ways it runs, including the data-source dispatch that closed three of the four tools' exposure to a known cloud-IP failure, and where that failure still sits open for the one tool not yet migrated.
 - [docs/EVALUATION.md](docs/EVALUATION.md): real evaluation runs against the deployed agent, including the finding that made moving arithmetic into code a requirement, not a preference: the same question, asked five times, answered five different ways, and three different models producing three different wrong answers on identical real data.
 - [docs/PARADIGM_SHIFTS.md](docs/PARADIGM_SHIFTS.md): five real moments where a Data Engineer's instinct and the reality of a non deterministic agent reached different answers, in the order they happened.
 - [docs/EVIDENCE.md](docs/EVIDENCE.md): the same real question, asked locally and through the deployed Lambda. Locally it returns real data. Through the Lambda it fails the exact same way every time, and the agent reports that honestly instead of inventing numbers. Includes real CloudWatch logs and screen recordings of both runs.
