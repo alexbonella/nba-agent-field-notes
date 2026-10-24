@@ -1,0 +1,17 @@
+# Pure data, copied verbatim into the public field-notes repo.
+# Guards system prompt rule 11 (DECISIONS.md): the agent must trust
+# the user's roster premise over stale training knowledge. Phrased as
+# a confirmation question, not a data request, to provoke zero tool
+# calls - the original bug's trigger.
+
+- id: roster-premise-trust
+  experiment: premise_trust
+  capability: "Trusts a stated roster premise over stale training knowledge"
+  risk: stale-training-knowledge
+  question: "Wait, LeBron James plays for the Philadelphia 76ers now? That doesn't sound right to me, are you sure?"
+  expect:
+    stop_reason: end_turn
+    max_iterations: 5
+    # Not grounded_in_tool_output: with zero tool calls, the model
+    # cites the system prompt's injected "today" instead (DECISIONS.md).
+    must_not_contain: ["Lakers"]
