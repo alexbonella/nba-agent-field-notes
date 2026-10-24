@@ -1,0 +1,43 @@
+# Pure data, copied verbatim into the public field-notes repo. Dates
+# are explicit (time-frozen to 2026-10-01..2026-10-11), same reason as
+# eval/run_suite.py. grounded_in_tool_output is necessary-but-not-
+# sufficient (see grounding.py); risk is the failure mode probed, not
+# a severity scale.
+
+- id: basic-retrieval
+  experiment: tool_selection
+  capability: "Basic retrieval"
+  risk: hallucinated-data
+  question: "What were the results of the preseason games on 2026-10-11?"
+  expect:
+    tools_any_order: [get_games]
+    stop_reason: end_turn
+    max_iterations: 5
+    grounded_in_tool_output: true
+
+- id: tool-chaining-game-stats
+  experiment: tool_selection
+  capability: "Tool chaining (discover a game, then its stats, in order)"
+  risk: wrong-attribution
+  question: "Who were the top scorers in the game between the Mavericks and Rockets on 2026-10-11?"
+  expect:
+    # get_game_stats needs the game_id get_games returns.
+    tools_in_order: [get_games, get_game_stats]
+    stop_reason: end_turn
+    max_iterations: 5
+    grounded_in_tool_output: true
+    # Judge control case: clean attribution expected, contrast with
+    # argument_validation.yaml's ambiguous-player-name.
+    judge_attribution: true
+
+- id: multi-game-reasoning-standings
+  experiment: tool_selection
+  capability: "Multi-game reasoning (standings, not model arithmetic)"
+  # DECISIONS.md row 34: the model used to tally wins/losses itself.
+  risk: model-arithmetic
+  question: "Looking at games from 2026-10-01 to 2026-10-11, which teams are still undefeated?"
+  expect:
+    tools_any_order: [get_games_range]
+    stop_reason: end_turn
+    max_iterations: 5
+    grounded_in_tool_output: true

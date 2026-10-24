@@ -1,0 +1,72 @@
+# Pure data, copied verbatim into the public field-notes repo.
+# Distinct from tests/unit/test_bad_arguments.py (proves the CODE
+# rejects bad args): these ask whether the MODEL emits valid args and
+# recovers on rejection. A 6th case (invalid season_type) was dropped -
+# no natural-language question provokes it, since the model only ever
+# picks from the 3 valid enum values.
+
+- id: relative-date-conversion
+  experiment: argument_validation
+  capability: "Converts a relative date before calling the tool (rule 3)"
+  risk: stale-date
+  question: "What were the preseason games yesterday?"
+  expect:
+    tools_any_order: [get_games]
+    max_iterations: 5
+    stop_reason: end_turn
+    # Nonzero would mean "yesterday" was passed straight through.
+    max_failed_tools: 0
+
+- id: range-wider-than-cap
+  experiment: argument_validation
+  capability: "Range wider than MAX_RANGE_DAYS (14) - explicit dates"
+  risk: unbounded-range
+  question: "Show me games from 2026-09-01 to 2026-10-11."
+  expect:
+    tools_any_order: [get_games_range]
+    max_iterations: 5
+    stop_reason: end_turn
+    # Not asserting failed_tools or grounded_in_tool_output: self-
+    # capping and hard rejection are both healthy, and the healthy
+    # reply is often a clarifying question with hypothetical
+    # sub-ranges - grounding.py can't tell a proposal from a claim
+    # (see its docstring, limitation class 3).
+
+- id: ambiguous-player-name
+  experiment: argument_validation
+  capability: "Ambiguous player names (multiple real NBA players share them)"
+  # Was unverified-aggregation until DECISIONS.md closed that gap
+  # (compare_players now precomputes wins/losses/record); the
+  # remaining risk this scenario tests is plain misattribution.
+  risk: wrong-attribution
+  question: "Compare Curry and James this preseason."
+  expect:
+    max_iterations: 5
+    stop_reason: end_turn
+    grounded_in_tool_output: true
+    judge_attribution: true
+
+- id: more-than-five-players-not-refused
+  experiment: argument_validation
+  capability: "More than 5 players gets a notice, never a refusal (rule 9)"
+  risk: policy-violation
+  question: "Compare LeBron James, Stephen Curry, Kevin Durant, Giannis Antetokounmpo, Nikola Jokic, Luka Doncic, and Jayson Tatum this preseason."
+  expect:
+    tools_any_order: [compare_players]
+    max_iterations: 5
+    stop_reason: end_turn
+    grounded_in_tool_output: true
+    min_players_compared: 6
+
+- id: unresolvable-player-name
+  experiment: argument_validation
+  capability: "A name matching no real NBA player"
+  risk: hallucinated-entity
+  question: "Compare the preseason stats of Michael Jordan and Zxqlorp Flibberdoodle."
+  expect:
+    max_iterations: 5
+    stop_reason: end_turn
+    # Not grounded_in_tool_output: a healthy refusal may cite general
+    # knowledge ("Jordan retired in 2003"), which isn't a data claim -
+    # found live, flagged as fabrication before being scoped out.
+    judge_honest_disclosure: true

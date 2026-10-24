@@ -22,6 +22,7 @@ The same flow, with more detail on the reliability layer, is in [docs/ARCHITECTU
 - [docs/PARADIGM_SHIFTS.md](docs/PARADIGM_SHIFTS.md): five real moments where a Data Engineer's instinct and the reality of a non deterministic agent reached different answers, in the order they happened.
 - [docs/EVIDENCE.md](docs/EVIDENCE.md): the same real question, asked locally and through the deployed Lambda. Locally it returns real data. Through the Lambda it fails the exact same way every time, and the agent reports that honestly instead of inventing numbers. Includes real CloudWatch logs and screen recordings of both runs.
 - [docs/SELECTED_IMPLEMENTATION.md](docs/SELECTED_IMPLEMENTATION.md): a handful of real code fragments, each one a direct response to a specific failure, not a general purpose toolkit.
+- [agentic-reliability-study/](agentic-reliability-study/): runnable scenarios and evaluators, built on the Strands Evals SDK, asking whether the agent recovers from failure by design or by luck. Includes two regression replays: one that reproduces a real, previously-fixed bug on command, and one honest negative result that doesn't.
 
 ## What is coming
 
